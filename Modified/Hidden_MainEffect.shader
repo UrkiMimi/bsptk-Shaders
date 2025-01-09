@@ -13,6 +13,7 @@ Shader "Hidden/MainEffect" {
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
+			#pragma shader_feature STEREO_ENABLED
 			
 			#include "UnityCG.cginc"
 			struct v2f
@@ -74,14 +75,16 @@ Shader "Hidden/MainEffect" {
                 float4 tmp2;
 				float2 sceneUVs = (inp.projPos.xy / inp.projPos.w);
 				float2 uvInvert = sceneUVs;
-				#ifdef UNITY_UV_STARTS_AT_TOP
-				{
-					uvInvert.y = 1 - uvInvert.y;
-				}
-				#else
-				{
-					//uvInvert.y = 1 - uvInvert.y;
-				}
+				#ifdef STEREO_ENABLED
+					#ifdef UNITY_UV_STARTS_AT_TOP
+					{
+						uvInvert.y = 1 - uvInvert.y;
+					}
+					#else
+					{
+						//uvInvert.y = 1 - uvInvert.y;
+					}
+					#endif
 				#endif
                 tmp0 = tex2D(_MainTex, sceneUVs);
                 tmp1.x = saturate(tmp0.w * _BaseColorBoost + -_BaseColorBoostThreshold);
