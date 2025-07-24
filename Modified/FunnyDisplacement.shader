@@ -152,7 +152,7 @@ Shader "Custom/Urki/ScreenDisplacement" {
                 	tmp2 = tex2D(_GrabTexture2, tmp0.xy);
 				}
 				#endif
-                tmp2 = tmp2 * _TintColor + (_AddColorIntensity * _TintColor);
+                tmp2 = tmp2 * _TintColor + (_AddColorIntensity * _TintColor * float4(1,1,1,0));
                 tmp2 = tmp2 - tmp1;
                 o.sv_target = tmp0.zzzz * tmp2 + tmp1;
                 return o;

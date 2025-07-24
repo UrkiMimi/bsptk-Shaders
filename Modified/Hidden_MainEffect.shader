@@ -30,11 +30,13 @@ Shader "Hidden/MainEffect" {
 			// $Globals ConstantBuffers for Vertex Shader
 			float4 _MainTex_ST;
 			float2 _MainTex_TexelSize;
+			float4 _GlobalBlueNoiseParams;
 			// $Globals ConstantBuffers for Fragment Shader
 			float _BaseColorBoost;
 			float _BaseColorBoostThreshold;
 			float _BloomIntensity;
 			float _FadeAmount;
+			float _GlobalRandomValue;
 			// Custom ConstantBuffers for Vertex Shader
 			// Custom ConstantBuffers for Fragment Shader
 			// Texture params for Vertex Shader
@@ -42,6 +44,7 @@ Shader "Hidden/MainEffect" {
 			sampler2D _MainTex;
 			sampler2D _BloomTex;
 			sampler2D _CameraDepthTexture;
+			sampler2D _GlobalBlueNoiseTex;
 			
 			// Keywords: 
 			v2f vert(appdata_full v)
@@ -73,6 +76,7 @@ Shader "Hidden/MainEffect" {
                 float4 tmp0;
                 float4 tmp1;
                 float4 tmp2;
+				float4 blueNoise;
 				float2 sceneUVs = (inp.projPos.xy / inp.projPos.w);
 				float2 uvInvert = sceneUVs;
 				#ifdef STEREO_ENABLED
@@ -93,6 +97,9 @@ Shader "Hidden/MainEffect" {
                 tmp1 = tex2D(_BloomTex, uvInvert);
                 tmp0 = tmp1 * _BloomIntensity.xxxx + tmp0;
                 tmp0.xyz = saturate(tmp0.xyz);
+				//bluenoise
+				//blueNoise = tex2D(_GlobalBlueNoiseTex, _GlobalBlueNoiseParams);
+				//tmp0 -= blueNoise;
                 o.sv_target.w = tmp0.w;
                 o.sv_target.xyz = tmp0.xyz * _FadeAmount.xxxx;
                 return o;

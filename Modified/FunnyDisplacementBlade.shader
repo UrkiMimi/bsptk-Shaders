@@ -103,7 +103,15 @@ Shader "Custom/Urki/SaberBlade" {
                 tmp1.w = rsqrt(tmp1.w);
                 tmp2.xyz = tmp1.www * tmp2.xyz;
                 tmp1.x = dot(tmp1.xyz, tmp2.xyz);
-                tmp1.y = _LightRimOffset + 1.0;
+				#ifdef ENABLE_QUEST_OPTIMIZATIONS
+				{
+					tmp1.y = (_LightRimOffset * 0.5) + 1.0;
+				}
+				#else
+				{
+					tmp1.y = _LightRimOffset + 1.0;
+				}
+				#endif
                 tmp1.x = tmp1.y - tmp1.x;
                 o.texcoord4.x = saturate(tmp1.x * _LightRimScale);
                 o.texcoord.xy = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;
@@ -136,12 +144,17 @@ Shader "Custom/Urki/SaberBlade" {
                 tmp0 = tex2D(_MainTex, (inp.texcoord.xy + UVTime));
                 tmp0.xy = tmp0.xy - float2(0.5, 0.5);
 				#ifdef ENABLE_QUEST_OPTIMIZATIONS
-				{
+				{	
+					// old
+					/*
 					tmp0.xy = tmp0.xy * _BloomPrePassTexture_TexelSize.xy;
                 	tmp0.zw = inp.texcoord2.xy / inp.texcoord2.ww;
 					sceneUVs.y = 1 - sceneUVs.y;
                 	tmp0 = tex2D(_BloomPrePassTexture, sceneUVs);
 					tmp0.xyz = (tmp0.x + tmp0.y + tmp0.z) / 3;
+					tmp0.w = 0;*/
+					tmp0 = tex2D(_MainTex, (inp.texcoord.xy + UVTime));
+					tmp0 = (tmp0.x + tmp0.y + tmp0.z) / 3;
 					tmp0.w = 0;
 				}
 				#else
@@ -152,7 +165,7 @@ Shader "Custom/Urki/SaberBlade" {
                 	tmp0 = tex2D(_GrabTexture1, tmp0.xy);
 				}
 				#endif
-                tmp0 = tmp0 * _TintColor + (_AddColorIntensity * _TintColor);
+                tmp0 = tmp0 * _TintColor + (_AddColorIntensity * _TintColor * float4(1,1,1,0));
                 tmp1 = _TintColor - tmp0;
 				#ifdef MAIN_EFFECT_ENABLED
 					o.sv_target = inp.texcoord4.xxxx * tmp1 + tmp0;

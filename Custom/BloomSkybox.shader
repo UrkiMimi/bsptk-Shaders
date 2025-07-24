@@ -156,9 +156,9 @@ Shader "Skybox/BloomSkybox"
 }
 /*ASEBEGIN
 Version=18935
-161.6;59.2;1167;695;431.568;161.7045;1;True;False
+0;18;1920;993;808.068;310.7045;1;True;False
 Node;AmplifyShaderEditor.RangedFloatNode;11;-463.068,-98.2045;Inherit;False;Global;_CustomFogColorMultiplier;_CustomFogColorMultiplier;3;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.Vector4Node;8;-400.068,-257.2045;Inherit;False;Global;_CustomFogColor;_CustomFogColor;3;0;Create;True;0;0;0;False;0;False;0,0,0,0;0,0,0,1;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.Vector4Node;8;-400.068,-257.2045;Inherit;False;Global;_CustomFogColor;_CustomFogColor;3;0;Create;True;0;0;0;False;0;False;0,0,0,0;1,0,0,0;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.GrabScreenPosition;12;-424.568,-20.7045;Inherit;False;0;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;10;-42.06799,-240.2045;Inherit;False;2;2;0;FLOAT4;0,0,0,0;False;1;FLOAT;0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.SamplerNode;1;-180,-52;Inherit;True;Global;_BloomPrePassTexture;_BloomPrePassTexture;1;0;Create;True;0;0;0;False;0;False;-1;None;;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
@@ -179,4 +179,4 @@ WireConnection;0;2;4;0
 WireConnection;0;9;3;0
 WireConnection;0;11;13;0
 ASEEND*/
-//CHKSM=094C4ABC94B9B6EF05A43834324D4A3CFB30F531
+//CHKSM=AA918081D516E562B8BB4CCAA82031DD6F0D1B04
